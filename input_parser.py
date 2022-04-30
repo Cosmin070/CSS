@@ -105,11 +105,11 @@ def get_expression(variables):
     return expression
 
 
-f = open("demofile.txt", "r")
+f = open("input.xml", "r")
 content = f.readlines()
 check_for_tag_order(content)
-f = open("demofile.txt", "r")
+f = open("input.xml", "r")
 content_string = re.sub(r"[^a-zA-Z0-9<>()+-/*^√]", "", f.read())
 validate_tags(content_string)
-print(content_string)
+print("stripped input:", content_string)
 substituted_expression = get_expression(get_variables_and_values(content_string))
