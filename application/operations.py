@@ -100,14 +100,13 @@ def subtraction(str1, str2):
 def division(a, b):
     result = ''
     if b == '0':
-        return False
+        raise Exception("Division by 0.")
     if a == '0':
         return '0'
     while is_smaller(b, a) or a == b:
         print("a")
         a = subtraction(a, b)
         result = summation(result, '1')
-    # rest = a
     return result
 
 
@@ -115,7 +114,7 @@ def square_root(number):
     if number == '0' or number == '1':
         return number
     if '-' in number:
-        raise Exception("Negative number")
+        raise Exception("Negative number.")
     result = '1'
     temporary_power = multiplication(result, result)
     while is_smaller(temporary_power, number):

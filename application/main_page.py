@@ -49,6 +49,16 @@ class MainPage(PageWindow):
         self.path.setDisabled(True)
         self.path.setPlaceholderText("Path to the XML file...")
 
+        self.error_label = QtWidgets.QLabel(self)
+        self.error_label.setGeometry(QtCore.QRect(20, 500, 990, 40))
+        self.error_label.setStyleSheet("color: red")
+        self.error_label.setObjectName("error_label")
+
+        self.clearButton = QtWidgets.QPushButton(self)
+        self.clearButton.setGeometry(QtCore.QRect(60, 270, 100, 50))
+        self.clearButton.setObjectName("clearButton")
+        self.clearButton.clicked.connect(self.clear_expression)
+
         self.plusButton = QtWidgets.QPushButton(self)
         self.plusButton.setGeometry(QtCore.QRect(220, 270, 50, 50))
         self.plusButton.setObjectName("plusButton")
@@ -139,33 +149,49 @@ class MainPage(PageWindow):
     def add_symbol(self, symbol):
         self.writeEquation.setText(self.writeEquation.toPlainText() + f"{symbol}")
 
+    def clear_expression(self):
+        self.path.setText("")
+        self.writeEquation.setText("")
+        self.result_label.setText("")
+
     def show_equation(self, file_path):
-        if len(file_path) > 0:
-            self.is_from_file = True
-            self.expression = parse(file_path)
-            self.writeEquation.setText(self.expression)
-            self.compute_event()
+        try:
+            if len(file_path) > 0:
+                self.is_from_file = True
+                self.expression = parse(file_path)
+                self.writeEquation.setText(self.expression)
+                self.compute_event()
+        except Exception as e:
+            self.error_label.setText(str(e))
 
     def compute_event(self):
-        if self.is_from_file:
-            self.is_from_file = False
-        else:
-            self.path.setText("")
-        result = evaluate(self.writeEquation.toPlainText())
-        self.result_label.setText(f"{result}")
-        write(result)
+        try:
+            if len(self.writeEquation.toPlainText()) == 0:
+                return
+            if self.is_from_file:
+                self.is_from_file = False
+            else:
+                self.path.setText("")
+            result = evaluate(self.writeEquation.toPlainText())
+            self.result_label.setText(f"{result}")
+            write(result)
+            self.error_label.setText("")
+        except Exception as e:
+            self.error_label.setText(str(e))
 
     def retranslate_ui(self, Dialog):
         _translate = QtCore.QCoreApplication.translate
         Dialog.setWindowTitle(_translate("Dialog", "Dialog"))
         self.toolButton.setText(_translate("Dialog", "..."))
         self.computeButton.setText(_translate("Dialog", "Compute"))
+        self.clearButton.setText(_translate("MainWindow", "Clear", None))
         self.plusButton.setText(_translate("MainWindow", "+", None))
         self.minusButton.setText(_translate("MainWindow", "-", None))
         self.timesButton.setText(_translate("MainWindow", "*", None))
-        self.pwrButton.setText(_translate("MainWindow", "/", None))
-        self.divButton.setText(_translate("MainWindow", "^", None))
+        self.pwrButton.setText(_translate("MainWindow", "^", None))
+        self.divButton.setText(_translate("MainWindow", "/", None))
         self.sqrtButton.setText(_translate("MainWindow", "\u221a", None))
         self.label.setText(_translate("MainWindow", "Import Equations XML", None))
         self.equation_label.setText(_translate("MainWindow", "Equation", None))
         self.computed_result_label.setText(_translate("MainWindow", "Result", None))
+        self.error_label.setText(_translate("MainWindow", "", None))
