@@ -1,12 +1,5 @@
 import re
 
-equation_tag = ["<equation>", "</equation>"]
-expression_tag = ["<expression>", "</expression>"]
-equation_open_tag_found = False
-expression_open_tag_found = False
-equation_close_tag_found = False
-expression_close_tag_found = False
-
 
 def find_nth(haystack, needle, n):
     start = haystack.find(needle)
@@ -60,8 +53,11 @@ def validate_tags(content):
         print("open tag length different than close tag length")
 
 
-def check_for_tag_order(content):
-    global equation_close_tag_found, equation_open_tag_found, expression_close_tag_found, expression_open_tag_found
+def check_for_tag_order(content, equation_tag, expression_tag):
+    equation_open_tag_found = False
+    expression_open_tag_found = False
+    equation_close_tag_found = False
+    expression_close_tag_found = False
     for each_line in content:
         if each_line.find(equation_tag[0]) != -1:
             if not equation_close_tag_found:
@@ -105,11 +101,19 @@ def get_expression(variables):
     return expression
 
 
-f = open("input.xml", "r")
-content = f.readlines()
-check_for_tag_order(content)
-f = open("input.xml", "r")
-content_string = re.sub(r"[^a-zA-Z0-9<>()+-/*^√]", "", f.read())
-validate_tags(content_string)
-print("stripped input:", content_string)
-substituted_expression = get_expression(get_variables_and_values(content_string))
+def parse(path):
+    equation_tag = ["<equation>", "</equation>"]
+    expression_tag = ["<expression>", "</expression>"]
+    if not path.endswith(".xml"):
+        return
+    file = open(path, "r")
+    content = file.readlines()
+    print(content)
+    check_for_tag_order(content, equation_tag, expression_tag)
+    file = open(path, "r")
+    content_string = re.sub(r"[^a-zA-Z0-9<>()+-/*^√]", "", file.read())
+    print(content_string)
+    validate_tags(content_string)
+    print("stripped input:", content_string)
+    substituted_expression = get_expression(get_variables_and_values(content_string))
+    return substituted_expression

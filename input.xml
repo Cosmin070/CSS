@@ -1,7 +1,0 @@
-<equation>
-    <fg> 102520 </fg>
-    <expression> a*(b-c)*fg </expression>
-    <b> 4 </b>
-    <a> 3 </a>
-    <c> 5 </c>
-</equation>
