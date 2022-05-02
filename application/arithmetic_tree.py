@@ -27,10 +27,17 @@ def get_result(a, b, operand):
 
 
 def compute_operation(operands, operations):
+    if not all(len(x) < 128 for x in operands):
+        raise Exception("Number too large.")
     if operations[-1] != '√':
         val2 = operands.pop()
         val1 = operands.pop()
         op = operations.pop()
+        if op in '*/' and ((len(val1) + len(val2) >= 8 and abs(len(val1) - len(val2)) < 3)
+                           or (len(val1) + len(val2) > 20)):
+            raise Exception("Number too large.")
+        if op == "^" and ((len(val1) + len(val2) >= 6) or (len(val2) > 2)):
+            raise Exception("Number too large.")
         operands.append(get_result(val1, val2, op))
     else:
         val2 = None

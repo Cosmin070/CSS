@@ -106,7 +106,7 @@ class MainPage(PageWindow):
 
         self.result_label = QtWidgets.QTextEdit(self)
         self.result_label.setEnabled(False)
-        self.result_label.setGeometry(QtCore.QRect(130, 370, 250, 40))
+        self.result_label.setGeometry(QtCore.QRect(130, 340, 750, 100))
         self.result_label.setObjectName("result_label")
 
         self.computed_result_label = QtWidgets.QLabel(self)
