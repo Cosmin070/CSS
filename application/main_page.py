@@ -34,60 +34,74 @@ class MainPage(PageWindow):
         self.frame.setObjectName("frame")
 
         self.toolButton = QtWidgets.QToolButton(self)
-        self.toolButton.setGeometry(QtCore.QRect(950, 380, 40, 20))
+        self.toolButton.setGeometry(QtCore.QRect(780, 480, 40, 20))
         self.toolButton.setObjectName("toolButton")
         self.toolButton.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         self.toolButton.clicked.connect(self.browse_file_event)
 
-        self.computeButton = QtWidgets.QPushButton(self)
-        self.computeButton.setGeometry(QtCore.QRect(1020, 370, 100, 40))
-        self.computeButton.setObjectName("computeButton")
-        self.computeButton.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
-        self.computeButton.clicked.connect(self.compute_event)
-
         self.label = QtWidgets.QLabel(self)
-        self.label.setGeometry(QtCore.QRect(130, 370, 250, 40))
+        self.label.setGeometry(QtCore.QRect(20, 470, 250, 40))
         self.label.setObjectName("label")
 
         self.path = QtWidgets.QLineEdit(self)
-        self.path.setGeometry(QtCore.QRect(370, 370, 560, 40))
+        self.path.setGeometry(QtCore.QRect(270, 470, 500, 40))
         self.path.setObjectName("path")
         self.path.setDisabled(True)
         self.path.setPlaceholderText("Path to the XML file...")
 
         self.plusButton = QtWidgets.QPushButton(self)
-        self.plusButton.setGeometry(QtCore.QRect(470, 270, 50, 50))
+        self.plusButton.setGeometry(QtCore.QRect(220, 270, 50, 50))
         self.plusButton.setObjectName("plusButton")
         self.plusButton.clicked.connect(self.add_plus_symbol_event)
 
         self.minusButton = QtWidgets.QPushButton(self)
-        self.minusButton.setGeometry(QtCore.QRect(570, 270, 50, 50))
+        self.minusButton.setGeometry(QtCore.QRect(320, 270, 50, 50))
         self.minusButton.setObjectName("minusButton")
         self.minusButton.clicked.connect(self.add_minus_symbol_event)
 
         self.timesButton = QtWidgets.QPushButton(self)
-        self.timesButton.setGeometry(QtCore.QRect(670, 270, 50, 50))
+        self.timesButton.setGeometry(QtCore.QRect(420, 270, 50, 50))
         self.timesButton.setObjectName("timesButton")
         self.timesButton.clicked.connect(self.add_times_symbol_event)
 
+        self.divButton = QtWidgets.QPushButton(self)
+        self.divButton.setGeometry(QtCore.QRect(520, 270, 50, 50))
+        self.divButton.setObjectName("divButton")
+        self.divButton.clicked.connect(self.add_div_symbol_event)
+
+        self.pwrButton = QtWidgets.QPushButton(self)
+        self.pwrButton.setGeometry(QtCore.QRect(620, 270, 50, 50))
+        self.pwrButton.setObjectName("pwrButton")
+        self.pwrButton.clicked.connect(self.add_pwr_symbol_event)
+
         self.sqrtButton = QtWidgets.QPushButton(self)
-        self.sqrtButton.setGeometry(QtCore.QRect(770, 270, 50, 50))
+        self.sqrtButton.setGeometry(QtCore.QRect(720, 270, 50, 50))
         self.sqrtButton.setObjectName("sqrtButton")
         self.sqrtButton.clicked.connect(self.add_sqrt_symbol_event)
+
+        self.computeButton = QtWidgets.QPushButton(self)
+        self.computeButton.setGeometry(QtCore.QRect(820, 270, 100, 50))
+        self.computeButton.setObjectName("computeButton")
+        self.computeButton.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+        self.computeButton.clicked.connect(self.compute_event)
 
         self.writeEquation = QtWidgets.QTextEdit(self)
         self.writeEquation.setObjectName("writeEquation")
         self.writeEquation.setEnabled(True)
-        self.writeEquation.setGeometry(QtCore.QRect(100, 40, 1100, 200))
+        self.writeEquation.setGeometry(QtCore.QRect(130, 40, 830, 200))
 
-        self.readEquation = QtWidgets.QTextEdit(self)
-        self.readEquation.setObjectName("readEquation")
-        self.readEquation.setEnabled(False)
-        self.readEquation.setGeometry(QtCore.QRect(100, 500, 1100, 200))
+        self.equation_label = QtWidgets.QLabel(self)
+        self.equation_label.setGeometry(QtCore.QRect(30, 40, 250, 40))
+        self.equation_label.setObjectName("equation_label")
 
-        self.result_label = QtWidgets.QLabel(self)
-        self.result_label.setGeometry(QtCore.QRect(130, 670, 250, 40))
+        self.result_label = QtWidgets.QTextEdit(self)
+        self.result_label.setEnabled(False)
+        self.result_label.setGeometry(QtCore.QRect(130, 370, 250, 40))
         self.result_label.setObjectName("result_label")
+
+        self.computed_result_label = QtWidgets.QLabel(self)
+        self.computed_result_label.setGeometry(QtCore.QRect(30, 370, 250, 40))
+        self.computed_result_label.setObjectName("computed_result_label")
 
         self.retranslate_ui(self)
 
@@ -116,6 +130,12 @@ class MainPage(PageWindow):
     def add_times_symbol_event(self):
         self.add_symbol("*")
 
+    def add_pwr_symbol_event(self):
+        self.add_symbol("^")
+
+    def add_div_symbol_event(self):
+        self.add_symbol("/")
+
     def add_symbol(self, symbol):
         self.writeEquation.setText(self.writeEquation.toPlainText() + f"{symbol}")
 
@@ -132,7 +152,7 @@ class MainPage(PageWindow):
         else:
             self.path.setText("")
         result = evaluate(self.writeEquation.toPlainText())
-        self.result_label.setText(f"Result: {result}")
+        self.result_label.setText(f"{result}")
         write(result)
 
     def retranslate_ui(self, Dialog):
@@ -143,5 +163,9 @@ class MainPage(PageWindow):
         self.plusButton.setText(_translate("MainWindow", "+", None))
         self.minusButton.setText(_translate("MainWindow", "-", None))
         self.timesButton.setText(_translate("MainWindow", "*", None))
+        self.pwrButton.setText(_translate("MainWindow", "/", None))
+        self.divButton.setText(_translate("MainWindow", "^", None))
         self.sqrtButton.setText(_translate("MainWindow", "\u221a", None))
-        self.label.setText(_translate("MainWindow", "Import Equations XML File", None))
+        self.label.setText(_translate("MainWindow", "Import Equations XML", None))
+        self.equation_label.setText(_translate("MainWindow", "Equation", None))
+        self.computed_result_label.setText(_translate("MainWindow", "Result", None))

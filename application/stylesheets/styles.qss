@@ -6,7 +6,7 @@ QFrame
 QLabel
 {
     font-family: Comfortaa;
-    font-size: 15px;
+    font-size: 20px;
     border-image: none;
 }
 
@@ -21,7 +21,9 @@ QPushButton:hover
     background-color: rgb(80, 200, 120);
 }
 
-QPlainTextEdit
+QTextEdit
 {
-     background-color: rgb(80, 200, 120);
+    font-family: Comfortaa;
+    font-size: 15px;
+    border-image: none;
 }

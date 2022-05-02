@@ -2,7 +2,6 @@ from PyQt5 import QtWidgets, QtCore
 from PyQt5.QtWidgets import QWidget
 
 from application.main_page import MainPage
-from application.about_page import AboutPage
 from application.controller import PageWindow
 
 
@@ -13,7 +12,6 @@ class Window(QtWidgets.QMainWindow, QWidget):
         self.setCentralWidget(self.stacked_widget)
         self.m_pages = {}
         self.register(MainPage(), "main")
-        self.register(AboutPage(), "about")
         self.goto("main")
         PageWindow.add_fonts(self)
 
@@ -40,6 +38,6 @@ if __name__ == "__main__":
 
     app = QtWidgets.QApplication(sys.argv)
     w = Window()
-    w.resize(1300, 800)
+    w.resize(1000, 600)
     w.show()
     sys.exit(app.exec_())
