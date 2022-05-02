@@ -111,5 +111,16 @@ def division(a, b):
     return result
 
 
-def square_root():
-    return None
+def square_root(number):
+    if number == '0' or number == '1':
+        return number
+    if '-' in number:
+        raise Exception("Negative number")
+    result = '1'
+    temporary_power = multiplication(result, result)
+    while is_smaller(temporary_power, number):
+        result = summation(result, '1')
+        temporary_power = multiplication(result, result)
+    if temporary_power != number and is_smaller('1', temporary_power):
+        result = subtraction(result, '1')
+    return result

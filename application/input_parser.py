@@ -106,12 +106,12 @@ def parse(path):
     expression_tag = ["<expression>", "</expression>"]
     if not path.endswith(".xml"):
         return
-    file = open(path, "r")
+    file = open(path, "r", encoding='utf-8')
     content = file.readlines()
     print(content)
     check_for_tag_order(content, equation_tag, expression_tag)
-    file = open(path, "r")
-    content_string = re.sub(r"[^a-zA-Z0-9<>()+-/*^√]", "", file.read())
+    file = open(path, "r", encoding='utf-8')
+    content_string = re.sub(r"[^a-zA-Z0-9<>()+-/*√^]", "", file.read())
     print(content_string)
     validate_tags(content_string)
     print("stripped input:", content_string)
