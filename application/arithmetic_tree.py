@@ -43,7 +43,7 @@ def check_next_char(expression, i):
     while expression[i + 1] == ' ':
         i += 1
     if expression[i + 1].isdigit() or expression[i + 1] == '(' or expression[i + 1] == ')' \
-            or expression[i] in '+*-^' and expression[i+1] == '√':
+            or expression[i] in '+*-^' and expression[i + 1] == '√':
         return False
     return True
 

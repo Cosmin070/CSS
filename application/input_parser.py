@@ -27,7 +27,7 @@ def validate_tags(content):
     tag_start_position, tag_end_position = get_symbols_position(content)
     # checks if the number of ">" equals the number of "<"
     if len(tag_start_position) == len(tag_end_position):
-        # the occurences of either ">" or "<" should always be even
+        # the occurrences of either ">" or "<" should always be even
         if len(tag_start_position) % 2 == 1 or len(tag_end_position) % 2 == 1:
             print("tag unclosed or closed without being opened first")
         # checks if the symbol "<" comes always before ">"
@@ -77,7 +77,8 @@ def check_for_tag_order(content, equation_tag, expression_tag):
                 print("2wrong tag enclosing order" + each_line)
             else:
                 equation_close_tag_found = True
-    if equation_open_tag_found and equation_close_tag_found and expression_open_tag_found and expression_close_tag_found:
+    if equation_open_tag_found and equation_close_tag_found\
+            and expression_open_tag_found and expression_close_tag_found:
         print("tag order correct")
 
 
