@@ -1,8 +1,8 @@
 # CSS
 # Echipa 7
  
- Cruceanu Cosmin-Gabriel 
- Hanganu Alexandra 
- Mihăilă Emilian-Viorel 
- Pătrăuceanu Ionuț-Andrei 
- Samson Theodor 
+ 1. Cruceanu Cosmin-Gabriel 
+ 2. Hanganu Alexandra 
+ 3. Mihăilă Emilian-Viorel 
+ 4. Pătrăuceanu Ionuț-Andrei 
+ 5. Samson Theodor 
