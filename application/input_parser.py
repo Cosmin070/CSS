@@ -44,7 +44,7 @@ def validate_tags(content):
             if i % 2 == 0:
                 if content[tag_start_position[i] + 1] != "/":
                     closed_tags_valid = False
-        else:
+        if not (open_tags_valid and closed_tags_valid):
             raise Exception("Invalid tags")
     else:
         raise Exception("Open tag length different than close tag length")
