@@ -52,7 +52,6 @@ def validate_tags(content):
 
 def check_for_tag_order(content, equation_tag, expression_tag):
     equation_open_tag_found = False
-    expression_open_tag_found = False
     equation_close_tag_found = False
     expression_close_tag_found = False
     for each_line in content:
@@ -64,9 +63,6 @@ def check_for_tag_order(content, equation_tag, expression_tag):
         if each_line.find(expression_tag[0]) != -1:
             if not equation_open_tag_found:
                 raise Exception("Wrong tag enclosing order " + each_line)
-            else:
-                if not expression_close_tag_found:
-                    expression_open_tag_found = True
         if each_line.find(expression_tag[1]) != -1:
             expression_close_tag_found = True
         if each_line.find(equation_tag[1]) != -1:
