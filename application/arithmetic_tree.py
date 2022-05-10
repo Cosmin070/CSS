@@ -35,9 +35,9 @@ def compute_operation(operands, operations):
         op = operations.pop()
         if op in '*/' and ((len(val1) + len(val2) >= 8 and abs(len(val1) - len(val2)) < 3)
                            or (len(val1) + len(val2) > 20)):
-            raise Exception("Number too large.")
-        if op == "^" and ((len(val1) + len(val2) >= 6) or (len(val2) > 2)):
-            raise Exception("Number too large.")
+            raise Exception("Number too large for multiplication/division.")
+        if op == "^" and (len(val2) > 10 or (len(val1) + len(val2) >= 10)):
+            raise Exception("Number too large for power.")
         operands.append(get_result(val1, val2, op))
     else:
         val2 = None
