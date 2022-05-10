@@ -1,5 +1,5 @@
 import unittest
-from ..operations import summation
+from application.operations import summation
 
 
 class OperationsTest(unittest.TestCase):
