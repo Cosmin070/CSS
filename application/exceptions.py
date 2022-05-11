@@ -1,20 +1,24 @@
 # define Python user-defined exceptions
-class large_number_exception(Exception):
+class LargeNumberException(Exception):
     """Raised for numbers too big"""
     pass
 
-class invalid_expression_exception(Exception):
+class InvalidExpressionException(Exception):
     """Raised for invalid expressions"""
     pass
 
-class tag_exception(Exception):
+class TagException(Exception):
     """Raised when there is a misplaced or misused tags"""
     pass
 
-class division_by_zero_exception(Exception):
+class DivisionByZeroException(Exception):
     """Raised when there is a division by zero"""
     pass
 
-class negative_number_exception(Exception):
+class NegativeNumberException(Exception):
     """Raised when there is a negative number"""
+    pass
+
+class NonXMLFileTypeException(Exception):
+    """Raised when the uploaded file is not a .xml file"""
     pass
