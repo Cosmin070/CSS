@@ -1,20 +1,20 @@
 # define Python user-defined exceptions
-class LargeNumberException(Exception):
+class large_number_exception(Exception):
     """Raised for numbers too big"""
     pass
 
-class InvalidExpressionException(Exception):
+class invalid_expression_exception(Exception):
     """Raised for invalid expressions"""
     pass
 
-class TagException(Exception):
+class tag_exception(Exception):
     """Raised when there is a misplaced or misused tags"""
     pass
 
-class DivisionByZeroException(Exception):
+class division_by_zero_exception(Exception):
     """Raised when there is a division by zero"""
     pass
 
-class NegativeNumberException(Exception):
+class negative_number_exception(Exception):
     """Raised when there is a negative number"""
     pass

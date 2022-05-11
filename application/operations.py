@@ -1,4 +1,4 @@
-from exceptions import *
+from exceptions import division_by_zero_exception, negative_number_exception
 
 def summation(a, b):
     if len(a) < len(b):
@@ -102,7 +102,7 @@ def subtraction(str1, str2):
 def division(a, b):
     result = ''
     if b == '0':
-        raise DivisionByZeroException("Division by 0.")
+        raise division_by_zero_exception("Division by 0.")
     if a == '0':
         return '0'
     while is_smaller(b, a) or a == b:
@@ -115,7 +115,7 @@ def square_root(number):
     if number == '0' or number == '1':
         return number
     if '-' in number:
-        raise NegativeNumberException("Negative number.")
+        raise negative_number_exception("Negative number.")
     result = '1'
     temporary_power = multiplication(result, result)
     while is_smaller(temporary_power, number):
