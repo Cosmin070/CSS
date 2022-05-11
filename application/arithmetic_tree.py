@@ -1,5 +1,5 @@
 from operations import summation, subtraction, power, multiplication, division, square_root
-from exceptions import *
+from application.exceptions import *
 
 
 def get_prio(operand):

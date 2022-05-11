@@ -1,4 +1,4 @@
-from exceptions import division_by_zero_exception, negative_number_exception
+from application.exceptions import division_by_zero_exception, negative_number_exception
 
 def summation(a, b):
     if len(a) < len(b):
