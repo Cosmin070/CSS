@@ -1,6 +1,6 @@
 import unittest
-from application.input_parser import find_nth, get_symbols_position, parse, get_variables_and_values, get_expression
-
+from application.input_parser import find_nth, get_symbols_position, parse, get_variables_and_values, get_expression, validate_tags
+from ..exceptions import TagException
 
 class ParserTest(unittest.TestCase):
 
@@ -18,9 +18,19 @@ class ParserTest(unittest.TestCase):
 
     def test_parse(self):
         self.assertEqual("5+0", parse("application/tests/test_input.xml"))
+        with self.assertRaises(TagException):
+            parse("application/tests/test_input1.xml")
+        with self.assertRaises(TagException):
+            parse("application/tests/test_input2.xml")
+        with self.assertRaises(TagException):
+            parse("application/tests/test_input3.xml")
+        with self.assertRaises(TagException):
+            parse("application/tests/test_input4.xml")
+
 
     def test_get_variables_and_values(self):
         self.assertDictEqual({'a': '5', 'b': '0', 'expression': 'a+b'}, get_variables_and_values('<equation><expression>a+b</expression><a>4</a><a>5</a><b>0</b></equation>'))
 
     def test_get_expression(self):
         self.assertEqual("5+0", get_expression({'expression': 'a+b', 'a': '5', 'b': '0'}))
+        self.failureException()
