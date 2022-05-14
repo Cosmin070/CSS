@@ -17,7 +17,7 @@ class ParserTest(unittest.TestCase):
         self.assertListEqual([4, 15, 29, 56, 61, 72], close_bracket_positions)
 
     def test_parse(self):
-        self.assertEqual("5+0", parse("test_input.xml"))
+        self.assertEqual("5+0", parse("tests/test_input.xml"))
 
     def test_get_variables_and_values(self):
         self.assertDictEqual({'a': '5', 'b': '0', 'expression': 'a+b'}, get_variables_and_values('<equation><expression>a+b</expression><a>4</a><a>5</a><b>0</b></equation>'))
