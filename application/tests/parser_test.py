@@ -1,6 +1,6 @@
 import unittest
 from application.input_parser import find_nth, get_symbols_position, parse, get_variables_and_values, get_expression, validate_tags
-from ..exceptions import TagException
+from application.exceptions import TagException
 
 class ParserTest(unittest.TestCase):
 
