@@ -1,6 +1,6 @@
 import unittest
 from application.input_parser import find_nth, get_symbols_position, parse, get_variables_and_values, get_expression, validate_tags
-from application.exceptions import TagException
+from application.exceptions import TagException, NonXMLFileTypeException
 
 class ParserTest(unittest.TestCase):
 
@@ -26,6 +26,16 @@ class ParserTest(unittest.TestCase):
             parse("application/tests/test_input3.xml")
         with self.assertRaises(TagException):
             parse("application/tests/test_input4.xml")
+        with self.assertRaises(TagException):
+            parse("application/tests/test_input5.xml")
+        with self.assertRaises(TagException):
+            parse("application/tests/test_input6.xml")
+        with self.assertRaises(TagException):
+            parse("application/tests/test_input7.xml")
+        with self.assertRaises(TagException):
+            parse("application/tests/test_input8.xml")
+        with self.assertRaises(NonXMLFileTypeException):
+            parse("application/tests/test_input9.org")
 
 
     def test_get_variables_and_values(self):
