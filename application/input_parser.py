@@ -1,5 +1,11 @@
 import re
+
 from application.exceptions import TagException, NonXMLFileTypeException
+
+CLOSE_BRACKET = ">"
+
+OPEN_BRACKET = "<"
+
 
 def find_nth(haystack, needle, n):
     start = haystack.find(needle)
@@ -13,12 +19,12 @@ def get_symbols_position(string):
     tag_start_position = []
     tag_end_position = []
     i = 1
-    while find_nth(string, "<", i) != -1:
-        tag_start_position.append(find_nth(string, "<", i))
+    while find_nth(string, OPEN_BRACKET, i) != -1:
+        tag_start_position.append(find_nth(string, OPEN_BRACKET, i))
         i += 1
     i = 1
-    while find_nth(string, ">", i) != -1:
-        tag_end_position.append(find_nth(string, ">", i))
+    while find_nth(string, CLOSE_BRACKET, i) != -1:
+        tag_end_position.append(find_nth(string, CLOSE_BRACKET, i))
         i += 1
     return tag_start_position, tag_end_position
 
@@ -98,8 +104,10 @@ def parse(path):
     file = open(path, "r", encoding='utf-8')
     content = file.readlines()
     check_for_tag_order(content, equation_tag, expression_tag)
+    file.close()
     file = open(path, "r", encoding='utf-8')
     content_string = re.sub(r"[^a-zA-Z0-9<>()+-/*√^]", "", file.read())
     validate_tags(content_string)
     substituted_expression = get_expression(get_variables_and_values(content_string))
+    file.close()
     return substituted_expression
