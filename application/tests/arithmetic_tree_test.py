@@ -65,3 +65,13 @@ class OperationsTest(unittest.TestCase):
         self.assertEqual(get_result(a, b, '√'), 'mocked')
         self.assertEqual(get_content_mock.call_count, 1)
         get_content_mock.assert_called_once()
+
+    def test_compute_operation(self):
+        n = 129
+        n_1 = ''.join(["{}".format(random.randint(0, 9)) for temp in range(0, n)])
+        n_2 = ''.join(["{}".format(random.randint(0, 9)) for temp in range(0, n)])
+        operators = [n_1, n_2]
+        operations = ['+']
+        with self.assertRaises(Exception) as context:
+            compute_operation(operators, operations)
+        self.assertTrue('Number too large.' in str(context.exception))
