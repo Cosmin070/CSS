@@ -138,6 +138,6 @@ class OperationsTest(unittest.TestCase):
             evaluate('(10 +++ 10 )')
         self.assertTrue('The expression is INVALID. Operation without both or any operand.' in str(context.exception))
         with self.assertRaises(Exception) as context:
-            evaluate('((10+10)*10)/5)')
+            evaluate('((10+10)')
         self.assertTrue('The expression is INVALID. Check parenthesis.' in str(context.exception))
         self.assertEqual(10, '(5+5)*5/5')
