@@ -119,10 +119,16 @@ class OperationsTest(unittest.TestCase):
         self.assertEqual(True, check_close_parenthesis(['+', ')']))
 
     def test_check_parenthesis(self):
-        self.assertEqual(False, check_close_parenthesis(['(', '+', ')']))
-        self.assertEqual(True, check_close_parenthesis(['+', ')']))
+        self.assertEqual(False, check_parenthesis(['(', '+', ')']))
+        self.assertEqual(True, check_parenthesis(['+', ')']))
 
     def test_check_next_char(self):
         self.assertEqual(True, check_next_char('    x+y', -1))
         self.assertEqual(False, check_next_char('10+25', -1))
         self.assertEqual(False, check_next_char('    (    10 +                 25 )', -1))
+
+    #raise InvalidExpressionException('The expression is INVALID. You can not close a parenthesis without to open one.')
+    def test_evaluate(self):
+        with self.assertRaises(Exception) as context:
+            evaluate('(      10 + 25 ))')
+        self.assertTrue('The expression is INVALID. You can not close a parenthesis without to open one.' in str(context.exception))
