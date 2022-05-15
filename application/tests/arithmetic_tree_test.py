@@ -113,3 +113,16 @@ class OperationsTest(unittest.TestCase):
         self.assertEqual(operators, ['mocked'])
         self.assertEqual(get_content_mock.call_count, 1)
         get_content_mock.assert_called_once()
+
+    def test_check_close_parenthesis(self):
+        self.assertEqual(True, check_close_parenthesis(['(', '+', ')']))
+        self.assertEqual(False, check_close_parenthesis(['+', ')']))
+
+    def test_check_parenthesis(self):
+        self.assertEqual(False, check_close_parenthesis(['(', '+', ')']))
+        self.assertEqual(True, check_close_parenthesis(['+', ')']))
+
+    def test_check_next_char(self):
+        self.assertEqual(True, '    x+y')
+        self.assertEqual(False, '10+25')
+        self.assertEqual(False, '    (    10 +                 25 )')
