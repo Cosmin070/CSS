@@ -127,8 +127,13 @@ class OperationsTest(unittest.TestCase):
         self.assertEqual(False, check_next_char('10+25', -1))
         self.assertEqual(False, check_next_char('    (    10 +                 25 )', -1))
 
-    #raise InvalidExpressionException('The expression is INVALID. You can not close a parenthesis without to open one.')
     def test_evaluate(self):
         with self.assertRaises(Exception) as context:
             evaluate('(      10 + 25 ))')
         self.assertTrue('The expression is INVALID. You can not close a parenthesis without to open one.' in str(context.exception))
+        with self.assertRaises(Exception) as context:
+            evaluate('(      10 +++ 25 )')
+        self.assertTrue('The expression is INVALID. You can not have successions of operators.' in str(context.exception))
+        with self.assertRaises(Exception) as context:
+            evaluate('(10 )')
+        self.assertTrue('The expression is INVALID. Operation without both or any operand.' in str(context.exception))
