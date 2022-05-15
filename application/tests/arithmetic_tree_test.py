@@ -79,8 +79,8 @@ class OperationsTest(unittest.TestCase):
     @patch('application.arithmetic_tree.get_result')
     def test_compute_operation_mock_not_sqr(self, get_content_mock):
         get_content_mock.return_value = 'mocked'
-        a = random.randint(1, 10000)
-        b = random.randint(1, 10000)
+        a = str(random.randint(1, 10000))
+        b = str(random.randint(1, 10000))
         operators = [a, b]
         operations = ['+']
         compute_operation(operators, operations)
@@ -91,7 +91,7 @@ class OperationsTest(unittest.TestCase):
     @patch('application.arithmetic_tree.get_result')
     def test_compute_operation_mock_sqr(self, get_content_mock):
         get_content_mock.return_value = 'mocked'
-        a = random.randint(1, 10000)
+        a = str(random.randint(1, 10000))
         operators = [a]
         operations = ['√']
         compute_operation(operators, operations)
