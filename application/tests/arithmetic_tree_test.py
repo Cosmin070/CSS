@@ -140,4 +140,4 @@ class OperationsTest(unittest.TestCase):
         with self.assertRaises(Exception) as context:
             evaluate('((10+10)')
         self.assertTrue('The expression is INVALID. Check parenthesis.' in str(context.exception))
-        self.assertEqual(10, evaluate('(5+5)*5/5'))
+        self.assertEqual('10', evaluate('(5+5)*5/5'))
