@@ -83,6 +83,8 @@ class OperationsTest(unittest.TestCase):
         with self.assertRaises(Exception) as context:
             compute_operation(operators, operations)
         self.assertTrue('Number too large.' in str(context.exception))
+        n_1 = ''.join(["{}".format(random.randint(0, 9)) for temp in range(0, n)])
+        n_2 = ''.join(["{}".format(random.randint(0, 9)) for temp in range(0, n)])
         operators = [n_1, n_2]
         operations = ['^']
         with self.assertRaises(Exception) as context:
