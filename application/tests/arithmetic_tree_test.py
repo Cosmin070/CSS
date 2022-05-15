@@ -75,3 +75,26 @@ class OperationsTest(unittest.TestCase):
         with self.assertRaises(Exception) as context:
             compute_operation(operators, operations)
         self.assertTrue('Number too large.' in str(context.exception))
+
+    @patch('application.arithmetic_tree.get_result')
+    def test_compute_operation_mock_not_sqr(self, get_content_mock):
+        get_content_mock.return_value = 'mocked'
+        a = random.randint(1, 10000)
+        b = random.randint(1, 10000)
+        operators = [a, b]
+        operations = ['+']
+        compute_operation(operators, operations)
+        self.assertEqual(operators, 'mocked')
+        self.assertEqual(get_content_mock.call_count, 1)
+        get_content_mock.assert_called_once()
+
+    @patch('application.arithmetic_tree.get_result')
+    def test_compute_operation_mock_sqr(self, get_content_mock):
+        get_content_mock.return_value = 'mocked'
+        a = random.randint(1, 10000)
+        operators = [a]
+        operations = ['√']
+        compute_operation(operators, operations)
+        self.assertEqual(operators, 'mocked')
+        self.assertEqual(get_content_mock.call_count, 1)
+        get_content_mock.assert_called_once()
