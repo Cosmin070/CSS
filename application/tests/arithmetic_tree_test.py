@@ -123,6 +123,6 @@ class OperationsTest(unittest.TestCase):
         self.assertEqual(True, check_close_parenthesis(['+', ')']))
 
     def test_check_next_char(self):
-        self.assertEqual(True, '    x+y')
-        self.assertEqual(False, '10+25')
-        self.assertEqual(False, '    (    10 +                 25 )')
+        self.assertEqual(True, check_next_char('    x+y', -1))
+        self.assertEqual(False, check_next_char('10+25', -1))
+        self.assertEqual(False, check_next_char('    (    10 +                 25 )', -1))
