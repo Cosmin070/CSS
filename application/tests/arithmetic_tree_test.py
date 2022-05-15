@@ -115,8 +115,8 @@ class OperationsTest(unittest.TestCase):
         get_content_mock.assert_called_once()
 
     def test_check_close_parenthesis(self):
-        self.assertEqual(True, check_close_parenthesis(['(', '+', ')']))
-        self.assertEqual(False, check_close_parenthesis(['+', ')']))
+        self.assertEqual(False, check_close_parenthesis(['(', '+', ')']))
+        self.assertEqual(True, check_close_parenthesis(['+', ')']))
 
     def test_check_parenthesis(self):
         self.assertEqual(False, check_close_parenthesis(['(', '+', ')']))
