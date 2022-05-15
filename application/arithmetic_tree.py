@@ -1,4 +1,4 @@
-from operations import summation, subtraction, power, multiplication, division, square_root
+from application.operations import summation, subtraction, power, multiplication, division, square_root
 from application.exceptions import LargeNumberException, InvalidExpressionException
 
 
