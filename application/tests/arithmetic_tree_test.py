@@ -1,6 +1,6 @@
 import random
 import unittest
-from unittest.mock import Mock, patch
+from unittest.mock import patch
 from application.arithmetic_tree import get_prio, get_result, compute_operation, check_next_char, check_close_parenthesis, check_parenthesis, evaluate
 
 
@@ -14,7 +14,9 @@ class OperationsTest(unittest.TestCase):
 
     @patch('application.arithmetic_tree.summation')
     def test_get_result(self, get_content_mock):
+        a = random.randint(1, 100000)
+        b = random.randint(1, 100000)
         get_content_mock.return_value = 'mocked'
-        self.assertEqual(get_result(), 'mocked')
+        self.assertEqual(get_result(a, b, '+'), 'mocked')
         self.assertEqual(get_content_mock.call_count, 1)
         get_content_mock.assert_called_once()
