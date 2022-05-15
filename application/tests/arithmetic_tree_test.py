@@ -132,8 +132,8 @@ class OperationsTest(unittest.TestCase):
             evaluate('(      10 + 25 ))')
         self.assertTrue('The expression is INVALID. You can not close a parenthesis without to open one.' in str(context.exception))
         with self.assertRaises(Exception) as context:
-            evaluate('(      10 +++ 25 )')
-        self.assertTrue('The expression is INVALID. You can not have successions of operators.' in str(context.exception))
+            evaluate('(√√25)')
+        self.assertTrue('The expression is INVALID. Operation without both or any operand.' in str(context.exception))
         with self.assertRaises(Exception) as context:
             evaluate('(10 )')
         self.assertTrue('The expression is INVALID. Operation without both or any operand.' in str(context.exception))
