@@ -12,9 +12,6 @@ from application.operations import square_root
 
 class OperationsTest(unittest.TestCase):
 
-    def test_summation(self):
-        self.assertEqual('0', summation('0', '0'))
-
     def test_summation_error(self):
         self.assertEqual('20', summation('7', '13'))
 
@@ -25,12 +22,12 @@ class OperationsTest(unittest.TestCase):
         self.assertEqual('0', power('0', '0'))
         self.assertEqual('10', power('10', '1'))
         self.assertEqual('36', power('6', '2'))
+        self.assertEqual('1', power('10', '0'))
         power('6', '2')
 
         mpl = Mock()
         mpl.multiplication()
         mpl.side_effect = multiplication
-        # mock.configure_mock(return_value=True)
         self.assertEqual('36', power('6', '2'))
         mpl.multiplication.assert_called_once()
 
@@ -56,9 +53,10 @@ class OperationsTest(unittest.TestCase):
         sum.summation.assert_called_once()
         sum.summation.assert_any_call()
 
-    def test_summatino(self):
+    def test_summatinon(self):
         self.assertEqual('12', summation('3', '9'))
         self.assertEqual('12', summation('9', '3'))
+        self.assertEqual('0', summation('0', '0'))
 
     def test_subtraction(self):
         self.assertEqual('6', subtraction('3', '9'))
@@ -73,11 +71,11 @@ class OperationsTest(unittest.TestCase):
 
     def test_division(self):
         self.assertEqual('0', division('0', '9'))
-        #self.assertEqual(DivisionByZeroException, division('9', '0'))
         with self.assertRaises(Exception) as context:
             division('9', '0')
         self.assertTrue('Division by 0.' in str(context.exception))
         self.assertEqual('3', division('12', '4'))
+
         subs = Mock()
         subs.summation()
         subs.side_effect = summation
