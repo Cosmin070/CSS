@@ -84,7 +84,7 @@ class OperationsTest(unittest.TestCase):
         operators = [a, b]
         operations = ['+']
         compute_operation(operators, operations)
-        self.assertEqual(operators, 'mocked')
+        self.assertEqual(operators, ['mocked'])
         self.assertEqual(get_content_mock.call_count, 1)
         get_content_mock.assert_called_once()
 
@@ -95,6 +95,6 @@ class OperationsTest(unittest.TestCase):
         operators = [a]
         operations = ['√']
         compute_operation(operators, operations)
-        self.assertEqual(operators, 'mocked')
+        self.assertEqual(operators, ['mocked'])
         self.assertEqual(get_content_mock.call_count, 1)
         get_content_mock.assert_called_once()
