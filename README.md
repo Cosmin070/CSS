@@ -6,3 +6,5 @@
  3. Mihăilă Emilian-Viorel 
  4. Pătrăuceanu Ionuț-Andrei 
  5. Samson Theodor 
+
+https://sonarcloud.io/project/overview?id=Cosmin070_CSS
