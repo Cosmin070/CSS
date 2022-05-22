@@ -179,9 +179,9 @@ class MainPage(PageWindow):
         except Exception as e:
             self.error_label.setText(str(e))
 
-    def retranslate_ui(self, Dialog):
+    def retranslate_ui(self, dialog):
         _translate = QtCore.QCoreApplication.translate
-        Dialog.setWindowTitle(_translate("Dialog", "Dialog"))
+        dialog.setWindowTitle(_translate("Dialog", "Dialog"))
         self.toolButton.setText(_translate("Dialog", "..."))
         self.computeButton.setText(_translate("Dialog", "Compute"))
         self.clearButton.setText(_translate("MainWindow", "Clear", None))
