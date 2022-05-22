@@ -10,12 +10,11 @@ class OperationsTest(unittest.TestCase):
         self.assertEqual(1, get_prio('+'))
         self.assertEqual(2, get_prio('*'))
         self.assertEqual(3, get_prio('^'))
-        self.assertEqual(0, get_prio(';'))
 
     @patch('application.arithmetic_tree.summation')
     def test_get_result_plus(self, get_content_mock):
-        a = random.randint(1, 100000)
-        b = random.randint(1, 100000)
+        a = str(random.randint(1, 100000))
+        b = str(random.randint(1, 100000))
         get_content_mock.return_value = 'mocked'
         self.assertEqual(get_result(a, b, '+'), 'mocked')
         self.assertEqual(get_content_mock.call_count, 1)
@@ -23,8 +22,8 @@ class OperationsTest(unittest.TestCase):
 
     @patch('application.arithmetic_tree.subtraction')
     def test_get_result_minus(self, get_content_mock):
-        a = random.randint(1, 100000)
-        b = random.randint(1, 100000)
+        a = str(random.randint(1, 100000))
+        b = str(random.randint(1, 100000))
         get_content_mock.return_value = 'mocked'
         self.assertEqual(get_result(a, b, '-'), 'mocked')
         self.assertEqual(get_content_mock.call_count, 1)
@@ -32,8 +31,8 @@ class OperationsTest(unittest.TestCase):
 
     @patch('application.arithmetic_tree.multiplication')
     def test_get_result_mul(self, get_content_mock):
-        a = random.randint(1, 100000)
-        b = random.randint(1, 100000)
+        a = str(random.randint(1, 100000))
+        b = str(random.randint(1, 100000))
         get_content_mock.return_value = 'mocked'
         self.assertEqual(get_result(a, b, '*'), 'mocked')
         self.assertEqual(get_content_mock.call_count, 1)
@@ -41,8 +40,8 @@ class OperationsTest(unittest.TestCase):
 
     @patch('application.arithmetic_tree.division')
     def test_get_result_div(self, get_content_mock):
-        a = random.randint(1, 100000)
-        b = random.randint(1, 100000)
+        a = str(random.randint(1, 100000))
+        b = str(random.randint(1, 100000))
         get_content_mock.return_value = 'mocked'
         self.assertEqual(get_result(a, b, '/'), 'mocked')
         self.assertEqual(get_content_mock.call_count, 1)
@@ -50,8 +49,8 @@ class OperationsTest(unittest.TestCase):
 
     @patch('application.arithmetic_tree.power')
     def test_get_result_pow(self, get_content_mock):
-        a = random.randint(1, 100000)
-        b = random.randint(1, 100000)
+        a = str(random.randint(1, 100000))
+        b = str(random.randint(1, 100000))
         get_content_mock.return_value = 'mocked'
         self.assertEqual(get_result(a, b, '^'), 'mocked')
         self.assertEqual(get_content_mock.call_count, 1)
@@ -59,8 +58,8 @@ class OperationsTest(unittest.TestCase):
 
     @patch('application.arithmetic_tree.square_root')
     def test_get_result_sqr(self, get_content_mock):
-        a = random.randint(1, 100000)
-        b = random.randint(1, 100000)
+        a = str(random.randint(1, 100000))
+        b = str(random.randint(1, 100000))
         get_content_mock.return_value = 'mocked'
         self.assertEqual(get_result(a, b, '√'), 'mocked')
         self.assertEqual(get_content_mock.call_count, 1)

@@ -2,20 +2,23 @@ import re
 
 from application.exceptions import TagException, NonXMLFileTypeException
 
-CLOSE_BRACKET = ">"
-
-OPEN_BRACKET = "<"
+CLOSE_BRACKET, OPEN_BRACKET = ">", '<'
 
 
 def find_nth(haystack, needle, n):
+    assert len(haystack) > 0
+    assert len(needle) > 0
     start = haystack.find(needle)
     while start >= 0 and n > 1:
+        assert start < len(haystack)
         start = haystack.find(needle, start + len(needle))
         n -= 1
+    assert n >= 1
     return start
 
 
 def get_symbols_position(string):
+    assert len(string) > 0
     tag_start_position = []
     tag_end_position = []
     i = 1
@@ -26,10 +29,13 @@ def get_symbols_position(string):
     while find_nth(string, CLOSE_BRACKET, i) != -1:
         tag_end_position.append(find_nth(string, CLOSE_BRACKET, i))
         i += 1
+    assert len(tag_start_position) > 0
+    assert len(tag_end_position) > 0
     return tag_start_position, tag_end_position
 
 
 def validate_tags(content):
+    assert len(content) > 0
     tag_start_position, tag_end_position = get_symbols_position(content)
     # checks if the number of ">" equals the number of "<"
     if len(tag_start_position) == len(tag_end_position):
@@ -38,6 +44,7 @@ def validate_tags(content):
             raise TagException("Tag unclosed or closed without being opened first")
         # checks if the symbol "<" comes always before ">"
         for i in range(0, len(tag_start_position)):
+            assert len(tag_start_position) - i > 0
             if tag_start_position[i] > tag_end_position[i]:
                 raise TagException("Tag enclosing positioned in wrong order")
         # checks if a tag is first opened and then closed
@@ -55,6 +62,9 @@ def validate_tags(content):
 
 
 def check_for_tag_order(content, equation_tag, expression_tag):
+    assert len(content) > 0
+    assert len(equation_tag) > 0
+    assert len(expression_tag) > 0
     equation_open_tag_found = False
     equation_close_tag_found = False
     expression_close_tag_found = False
@@ -88,6 +98,7 @@ def get_variables_and_values(string):
 
 
 def get_expression(variables):
+    assert variables != {}
     expression = variables["expression"]
     variable_keys = list(variables.keys())
     variable_values = list(variables.values())
@@ -97,6 +108,7 @@ def get_expression(variables):
 
 
 def parse(path):
+    assert path != ''
     equation_tag = ["<equation>", "</equation>"]
     expression_tag = ["<expression>", "</expression>"]
     if not path.endswith(".xml"):

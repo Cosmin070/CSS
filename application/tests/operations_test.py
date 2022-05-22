@@ -1,13 +1,12 @@
 import unittest
-from unittest.mock import MagicMock, Mock
+from unittest.mock import Mock
 
-from application.exceptions import DivisionByZeroException
-from application.operations import summation, subtraction
-from application.operations import power
-from application.operations import multiplication
-from application.operations import is_smaller
 from application.operations import division
+from application.operations import is_smaller
+from application.operations import multiplication
+from application.operations import power
 from application.operations import square_root
+from application.operations import summation, subtraction
 
 
 class OperationsTest(unittest.TestCase):
@@ -36,7 +35,6 @@ class OperationsTest(unittest.TestCase):
         sum.side_effect = summation
         sum.summation.assert_called_once()
         sum.summation.assert_any_call()
-        #self.assertEqual(sum.call_count, 2)
 
     def test_is_smaller(self):
         self.assertEqual(True, is_smaller('0', '2'))
@@ -67,7 +65,6 @@ class OperationsTest(unittest.TestCase):
         is_sml.side_effect = summation
         is_sml.summation.assert_called_once()
         is_sml.summation.assert_any_call()
-        # self.assertEqual(is_sml.call_count, 2)
 
     def test_division(self):
         self.assertEqual('0', division('0', '9'))

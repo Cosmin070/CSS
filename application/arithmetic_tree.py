@@ -3,6 +3,7 @@ from application.exceptions import LargeNumberException, InvalidExpressionExcept
 
 
 def get_prio(operand):
+    assert operand in ['+', '-', '*', '/', '^', '√', '(', ')']
     if operand == '+' or operand == '-':
         return 1
     if operand == '*' or operand == '/':
@@ -13,6 +14,9 @@ def get_prio(operand):
 
 
 def get_result(a, b, operand):
+    assert type(a) == str
+    assert type(b) == str
+    assert operand in ['+', '-', '*', '/', '^', '√']
     if operand == '+':
         return summation(a, b)
     if operand == '-':
@@ -28,6 +32,8 @@ def get_result(a, b, operand):
 
 
 def compute_operation(operands, operations):
+    assert all([type(op) == str for op in operations])
+    assert all([type(op) == str for op in operands])
     if not all(len(x) < 128 for x in operands):
         raise LargeNumberException("Number too large.")
     if operations[-1] != '√':
@@ -49,7 +55,10 @@ def compute_operation(operands, operations):
 
 def check_next_char(expression, i):
     while expression[i + 1] == ' ':
+        assert expression[i + 1] == ' '
+        assert len(expression) - i > 0
         i += 1
+    assert expression[i+1] != ' '
     if expression[i + 1].isdigit() or expression[i + 1] == '(' or expression[i + 1] == ')' \
             or expression[i] in '+*-^' and expression[i + 1] == '√':
         return False
@@ -73,6 +82,7 @@ def evaluate(expression):
     operations = []
     i = 0
     while i < len(expression):
+        assert len(expression) - i > 0
         if expression[i] == ' ':
             i += 1
             continue
@@ -87,14 +97,16 @@ def evaluate(expression):
             i -= 1
         elif expression[i] == ')':
             if check_close_parenthesis(operations):
-                raise InvalidExpressionException('The expression is INVALID. You can not close a parenthesis without to open one.')
+                raise InvalidExpressionException(
+                    'The expression is INVALID. You can not close a parenthesis without to open one.')
             while len(operations) != 0 and operations[-1] != '(':
                 compute_operation(operands, operations)
             operations.pop()
         else:
             try:
                 if check_next_char(expression, i):
-                    raise InvalidExpressionException('The expression is INVALID. You can not have successions of operators.')
+                    raise InvalidExpressionException(
+                        'The expression is INVALID. You can not have successions of operators.')
             except Exception as e:
                 raise InvalidExpressionException("The expression is INVALID. Operation without both or any operand.")
             while len(operations) != 0 and get_prio(operations[-1]) >= get_prio(expression[i]):
