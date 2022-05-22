@@ -67,7 +67,6 @@ def check_next_char(expression, i):
 
 def check_close_parenthesis(operations):
     assert type(operations) == list
-    assert len(operations) >= 2
     if '(' in operations:
         return False
     return True
