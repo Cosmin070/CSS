@@ -66,12 +66,15 @@ def check_next_char(expression, i):
 
 
 def check_close_parenthesis(operations):
+    assert type(operations) == list
+    assert len(operations) >= 2
     if '(' in operations:
         return False
     return True
 
 
 def check_parenthesis(operations):
+    assert type(operations) == list
     if operations.count('(') == operations.count(')'):
         return False
     return True
@@ -81,6 +84,8 @@ def evaluate(expression):
     operands = []
     operations = []
     i = 0
+    assert type(expression) == str
+    assert len(expression) > 0
     while i < len(expression):
         assert len(expression) - i > 0
         if expression[i] == ' ':
@@ -90,6 +95,7 @@ def evaluate(expression):
             operations.append(expression[i])
         elif expression[i].isdigit():
             val = ''
+            assert expression[i]
             while i < len(expression) and expression[i].isdigit():
                 val += expression[i]
                 i += 1
@@ -99,6 +105,7 @@ def evaluate(expression):
             if check_close_parenthesis(operations):
                 raise InvalidExpressionException(
                     'The expression is INVALID. You can not close a parenthesis without to open one.')
+            assert len(operations) > 0
             while len(operations) != 0 and operations[-1] != '(':
                 compute_operation(operands, operations)
             operations.pop()

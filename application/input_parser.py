@@ -88,6 +88,7 @@ def check_for_tag_order(content, equation_tag, expression_tag):
 
 
 def get_variables_and_values(string):
+    assert len(string) > 0
     tag_start_position, tag_end_position = get_symbols_position(string)
     variables = {}
     for i in range(1, len(tag_start_position) - 2, 2):
