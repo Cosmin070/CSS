@@ -126,7 +126,7 @@ def division(a, b):
     if a == '0':
         return '0'
     while is_smaller(b, a) or a == b:
-        assert len(subtraction(a, b)) >= 0
+        assert len(subtraction(a, b)) > 0
         a = subtraction(a, b)
         result = summation(result, '1')
     return result
